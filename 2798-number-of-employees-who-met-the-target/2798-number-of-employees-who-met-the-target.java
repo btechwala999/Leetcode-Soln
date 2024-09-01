@@ -6,11 +6,6 @@ class Solution {
                 count++;
             }
         }
-        if(count > 0){
-            return count;
-        }
-        else{
-            return 0;    
-        }
+        return count;
     }
 }
