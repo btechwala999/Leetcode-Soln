@@ -33,7 +33,6 @@ class Solution {
         int rightheight = height(root.right);
         int curr_diam = leftheight + rightheight;
         
-        int result = Math.max(Math.max(leftdiam, rightdiam), curr_diam);
-        return result;
+        return Math.max(Math.max(leftdiam, rightdiam), curr_diam);
     }
 }
