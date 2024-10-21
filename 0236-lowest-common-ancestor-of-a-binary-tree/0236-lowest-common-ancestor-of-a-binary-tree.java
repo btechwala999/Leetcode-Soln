@@ -8,43 +8,23 @@
  * }
  */
 class Solution {
-    public boolean getpath(TreeNode root, int n, ArrayList<TreeNode> path){
-        if(root == null){
-            return false;
+    
+    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q){
+        if(root == null || root.val == p.val || root.val == q.val){
+            return root;
         }
         
-        path.add(root);
+        TreeNode leftlca = lowestCommonAncestor(root.left,p,q);
+        TreeNode rightlca  = lowestCommonAncestor(root.right,p,q);
         
-        if(root.val == n){
-            return true;
+        if(rightlca == null){
+            return leftlca;
+        }
+        if(leftlca == null){
+            return rightlca;
         }
         
-        boolean foundleft = getpath(root.left, n, path);
-        boolean foundright = getpath(root.right, n, path);
-        
-        if(foundleft || foundright){
-            return true;
-        }
-        
-        path.remove(path.size() - 1);
-        return false;
+        return root;
     }
-    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
-        ArrayList<TreeNode> path1 = new ArrayList<>();
-        ArrayList<TreeNode> path2 = new ArrayList<>();
         
-        getpath(root, p.val, path1);
-        getpath(root, q.val, path2);
-        
-        int i = 0;
-        for(; i < path1.size() && i < path2.size(); i++){
-            if(path1.get(i) != path2.get(i)){
-                break;
-            }
-        }
-        
-        TreeNode lca = path1.get(i-1);
-        return lca;
-        
-    }
 }
